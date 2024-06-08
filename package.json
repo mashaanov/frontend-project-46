@@ -1,0 +1,22 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "Difference Calculator - a program that determines the difference between two data structures",
+  "main": "index.js",
+  "scripts": {
+    "test": "..."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mashaanov/frontend-project-46.git"
+  },
+  "keywords": [
+    "..."
+  ],
+  "author": "Maria Novikova",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mashaanov/frontend-project-46/issues"
+  },
+  "homepage": "https://github.com/mashaanov/frontend-project-46#readme"
+}

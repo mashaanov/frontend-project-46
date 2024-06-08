@@ -18,5 +18,8 @@
   "bugs": {
     "url": "https://github.com/mashaanov/frontend-project-46/issues"
   },
-  "homepage": "https://github.com/mashaanov/frontend-project-46#readme"
+  "homepage": "https://github.com/mashaanov/frontend-project-46#readme",
+  "dependencies": {
+    "commander": "^12.1.0"
+  }
 }

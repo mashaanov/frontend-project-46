@@ -3,6 +3,10 @@
   "version": "1.0.0",
   "description": "Difference Calculator - a program that determines the difference between two data structures",
   "main": "index.js",
+  "type": "module",
+  "bin": {
+    "gendiff": "./bin/gendiff.js"
+  },
   "scripts": {
     "test": "..."
   },
@@ -21,5 +25,10 @@
   "homepage": "https://github.com/mashaanov/frontend-project-46#readme",
   "dependencies": {
     "commander": "^12.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.4.0",
+    "eslint": "^9.4.0",
+    "globals": "^15.4.0"
   }
 }

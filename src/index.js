@@ -1,13 +1,12 @@
-import path from "path";
-import fs from "fs";
-import parse from "./parse.js";
+import path from 'path';
+import fs from 'fs';
+import parse from './parse.js';
 import buildTree from './buildTree.js';
 
-const getFullPath = (filepath) =>
-  path.resolve(process.cwd(), filepath);
+const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 const getExtFormat = (filepath) => path.extname(filepath).slice(1);
 
-const readFile = (filepath) => fs.readFileSync(filepath, "utf-8");
+const readFile = (filepath) => fs.readFileSync(filepath, 'utf-8');
 
 const getData = (filepath) => parse(fullFilePath1, getExtFormat(filepath));
 

@@ -3,3 +3,6 @@ lint:
 
 test:
 	npx jest
+	
+install-deps:
+    npm install

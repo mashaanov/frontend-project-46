@@ -1,0 +1,40 @@
+name: Node CI
+
+on:
+  - push
+  - pull_request
+
+env:
+  CI: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [12.x] # Укажите подходящую версию Node.js
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - run: make install
+      - run: make lint
+      - run: make test
+
+      # Шаг для тестирования и публикации покрытия кода
+      - name: Test & publish code coverage
+        # Используем действие для публикации на Code Climate
+        uses: paambaati/codeclimate-action@v5.0.0
+        # Установите переменную окружения для вашего Code Climate токена
+        env:
+          CC_TEST_REPORTER_ID: cf3c6f35ff768c25b2b3ff91928205a98d662f97502f1923eafae593b0fd5d17
+        with:
+          coverageCommand: make test-coverage
+          debug: true

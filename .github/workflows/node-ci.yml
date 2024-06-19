@@ -37,6 +37,9 @@ jobs:
       - name: Генерация отчета о покрытии кода
         run: npm test -- --coverage
 
+      - name: Просмотр содержимого файла lcov.info (для отладки)
+        run: cat ./coverage/lcov.info
+
       - name: Публикация отчета о покрытии в Code Climate
         uses: paambaati/codeclimate-action@v5.0.0
         env:

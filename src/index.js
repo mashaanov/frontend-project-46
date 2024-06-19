@@ -1,6 +1,6 @@
 import path from 'path';
 import fs from 'fs';
-import parse from './parse.js';
+import parse from './parses.js';
 import buildTree from './buildTree.js';
 import diffFormatter from './diffFormatter.js';
 

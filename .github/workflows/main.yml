@@ -22,8 +22,9 @@ jobs:
     steps:
       # Check-out repository under GitHub workspace
       # https://github.com/actions/checkout
-      - uses: actions/checkout@v3
-      
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
       # Step's name
       - name: Use Node.js ${{ matrix.node-version }}
         # Configures the node version used on GitHub-hosted runners
@@ -33,13 +34,13 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      
+
       - name: Install dependencies
         run: make install-deps
-      
+
       - name: Lint code
         run: make lint
-      
+
       - name: Run tests
         run: make test
 
@@ -53,5 +54,8 @@ jobs:
         with:
           coverageCommand: make test-coverage
           debug: true
+          coverageLocations: |
+            ${{github.workspace}}/coverage/lcov.info:lcov
+            ${{github.workspace}}/coverage/clover.xml:clover
 
 

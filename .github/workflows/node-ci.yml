@@ -1,0 +1,48 @@
+name: Node CI
+
+on:
+  push:
+  pull_request:
+
+env:
+  CI: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [14.x]  # Укажите версию Node.js, которая используется в вашем проекте
+
+    steps:
+      - name: Checkout репозитория
+        uses: actions/checkout@v3
+
+      - name: Установка Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Установка зависимостей
+        run: npm install
+
+      - name: Запуск линтера
+        run: npm run lint
+
+      - name: Запуск тестов
+        run: npm test
+
+      - name: Генерация отчета о покрытии кода
+        run: npm test -- --coverage
+
+      - name: Публикация отчета о покрытии в Code Climate
+        uses: paambaati/codeclimate-action@v5.0.0
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        with:
+          coverageCommand: npm test -- --coverage
+          debug: true
+          coverageLocations: |
+            ./coverage/lcov.info

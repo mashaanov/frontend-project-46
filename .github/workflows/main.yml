@@ -13,33 +13,40 @@ jobs:
 
     strategy:
       matrix:
-        node-version: [20.x]
+        node-version: [14.x]  # Укажите версию Node.js, которая используется в вашем проекте
 
     steps:
-      - name: Checkout repository
+      - name: Checkout репозитория
         uses: actions/checkout@v3
 
-      - name: Use Node.js ${{ matrix.node-version }}
+      - name: Установка Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v2
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Установка зависимостей
         run: npm install
 
-      - name: Run tests with coverage
-        run: npm run test -- --coverage
+      - name: Запуск линтинга
+        run: npm run lint
 
-      - name: Upload coverage to Code Climate
+      - name: Запуск тестов
+        run: npm test
+
+      - name: Генерация отчета о покрытии кода
+        run: npm test -- --coverage
+
+      - name: Публикация отчета о покрытии в Code Climate
         uses: paambaati/codeclimate-action@v5.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: npm run coverage
+          coverageCommand: npm test -- --coverage
           debug: true
           coverageLocations: |
             ./coverage/lcov.info
+
 
 
 

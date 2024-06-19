@@ -20,16 +20,17 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: 'npm'
-      - run: make install
-      - run: make lint
-      - run: make test
+      - run: npm install
+      - run: npm run lint  # Здесь вызывается команда, которая запускает ESLint
+      - run: npm run test  # Пример команды для запуска тестов
       - name: Test & publish code coverage
         uses: paambaati/codeclimate-action@v5.0.0
         env:
           CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
         with:
-          coverageCommand: make test-coverage
+          coverageCommand: npm run test-coverage
           debug: true
+
 
 
 

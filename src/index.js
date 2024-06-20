@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import parse from './parses.js';
 import buildTree from './buildTree.js';
-import diffFormatter from './diffFormatter.js';
+import diffFormatter from './formatters/stylish.js';
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 const getExtFormat = (filepath) => path.extname(filepath).slice(1);

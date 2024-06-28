@@ -4,6 +4,7 @@ import parse from './parses.js';
 import buildTree from './buildTree.js';
 import stylishFormatter from './formatters/stylish.js';
 import plainFormatter from './formatters/plain.js';
+import jsonFormatter from './formatters/json.js';
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 const getExtFormat = (filepath) => path.extname(filepath).slice(1);
@@ -22,6 +23,8 @@ const formatDiff = (diffTree, format) => {
       return stylishFormatter(diffTree);
     case 'plain':
       return plainFormatter(diffTree);
+    case 'json':
+      return jsonFormatter(diffTree);
     default:
       throw new Error(`Unknown format: ${format}`);
   }

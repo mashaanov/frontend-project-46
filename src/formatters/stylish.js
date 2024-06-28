@@ -15,7 +15,7 @@ const formatValue = (value, depth, countSpace = 4) => {
   return `{\n${formatted}\n${bracketIndent}}`;
 };
 
-const diffFormatter = (diffTree, depth = 1, countSpace = 4) => {
+const stylishFormatter = (diffTree, depth = 1, countSpace = 4) => {
   const indent = getIndentation(depth, countSpace);
   const sortedTree = _.sortBy(diffTree, 'key');
   const result = sortedTree
@@ -30,7 +30,7 @@ const diffFormatter = (diffTree, depth = 1, countSpace = 4) => {
         case 'unchanged':
           return `${indent}  ${node.key}: ${formatValue(node.value, depth, countSpace)}`;
         case 'nested':
-          return `${indent}  ${node.key}: ${diffFormatter(node.children, depth + 1, countSpace)}`;
+          return `${indent}  ${node.key}: ${stylishFormatter(node.children, depth + 1, countSpace)}`;
         default:
           throw new Error(`unknown type: ${node.type}`);
       }
@@ -39,4 +39,4 @@ const diffFormatter = (diffTree, depth = 1, countSpace = 4) => {
   return `{\n${result}\n${bracketIndent}}`;
 };
 
-export default diffFormatter;
+export default stylishFormatter;

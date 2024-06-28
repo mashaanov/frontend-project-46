@@ -9,7 +9,7 @@ test('testing stylish JSON and YAML', () => {
   const expectedResult = readFile(resultPath).trim();
   // Удаление лишних пробелов и переносов строк
 
-  expect(genDiff(filePath1, filePath2)).toEqual(expectedResult);
+  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(expectedResult);
 });
 
 test('testing stylish JSON default', () => {
@@ -19,7 +19,7 @@ test('testing stylish JSON default', () => {
 
   const expectedResult = readFile(resultPath).trim();
 
-  expect(genDiff(filePath1, filePath2)).toEqual(expectedResult);
+  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(expectedResult);
 });
 
 test('testing plain feature', () => {
@@ -29,5 +29,5 @@ test('testing plain feature', () => {
 
   const expectedResult = readFile(resultPath).trim();
 
-  expect(genDiff(filePath1, filePath2)).toEqual(expectedResult);
+  expect(genDiff(filePath1, filePath2, 'plain')).toEqual(expectedResult);
 });

@@ -2,7 +2,8 @@ import path from 'path';
 import fs from 'fs';
 import parse from './parses.js';
 import buildTree from './buildTree.js';
-import diffFormatter from './formatters/stylish.js';
+import stylishFormatter from './formatters/stylish.js';
+import plainFormatter from './formatters/plain.js';
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 const getExtFormat = (filepath) => path.extname(filepath).slice(1);
@@ -15,7 +16,18 @@ const getData = (filepath) => {
   return parse(content, format);
 };
 
-const genDiff = (filepath1, filepath2) => {
+const formatDiff = (diffTree, format) => {
+  switch (format) {
+    case 'stylish':
+      return stylishFormatter(diffTree);
+    case 'plain':
+      return plainFormatter(diffTree);
+    default:
+      throw new Error(`Unknown format: ${format}`);
+  }
+};
+
+const genDiff = (filepath1, filepath2, format = 'stylish') => {
   const fullFilePath1 = getFullPath(filepath1);
   const fullFilePath2 = getFullPath(filepath2);
 
@@ -23,7 +35,7 @@ const genDiff = (filepath1, filepath2) => {
   const data2 = getData(fullFilePath2);
   const diffTree = buildTree(data1, data2);
 
-  return diffFormatter(diffTree);
+  return formatDiff(diffTree, format);
 };
 
 export { readFile, genDiff };

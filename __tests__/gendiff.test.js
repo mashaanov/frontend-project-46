@@ -13,8 +13,8 @@ test('genDiff should return correct diff for JSON files', () => {
 });
 
 test('genDiff should return correct diff for YAML files', () => {
-  const filePath1 = getFixturePath('nested.yaml');
-  const filePath2 = getFixturePath('nested.yml');
+  const filePath1 = getFixturePath('file1.yaml');
+  const filePath2 = getFixturePath('file2.yaml');
   const resultPath = getFixturePath('result_genDiffNested.txt');
 
   const expectedResult = readFile(resultPath).trim();

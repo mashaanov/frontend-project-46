@@ -7,17 +7,12 @@ const runTest = (fileName1, fileName2, resultFileName, format) => {
   const resultPath = getFixturePath(resultFileName);
   const expectedResult = readFile(resultPath).trim();
 
-  let actualResult;
   if (format === 'json') {
     const expectedJsonString = JSON.stringify(JSON.parse(expectedResult));
-    actualResult = genDiff(filePath1, filePath2, 'json');
-    expect(actualResult).toEqual(expectedJsonString);
+    expect(genDiff(filePath1, filePath2, 'json')).toEqual(expectedJsonString);
   } else {
-    actualResult = genDiff(filePath1, filePath2, format);
-    expect(actualResult).toEqual(expectedResult);
+    expect(genDiff(filePath1, filePath2, format)).toEqual(expectedResult);
   }
-
-  expect(actualResult).toBeDefined();
 };
 
 test('testing stylish JSON and YAML', () => {

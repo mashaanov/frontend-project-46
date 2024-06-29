@@ -1,54 +1,36 @@
 import { genDiff, readFile } from '../src/index.js';
 import getFixturePath from '../src/helper.js';
 
-test('testing stylish JSON and YAML', () => {
-  const filePath1 = getFixturePath('file1.json');
-  const filePath2 = getFixturePath('file2.json');
-  const resultPath = getFixturePath('expectFileStylish.txt');
-
+const runTest = (fileName1, fileName2, resultFileName, format) => {
+  const filePath1 = getFixturePath(fileName1);
+  const filePath2 = getFixturePath(fileName2);
+  const resultPath = getFixturePath(resultFileName);
   const expectedResult = readFile(resultPath).trim();
-  // Удаление лишних пробелов и переносов строк
 
-  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(expectedResult);
+  if (format === 'json') {
+    const expectedJsonString = JSON.stringify(JSON.parse(expectedResult));
+    expect(genDiff(filePath1, filePath2, 'json')).toEqual(expectedJsonString);
+  } else {
+    expect(genDiff(filePath1, filePath2, format)).toEqual(expectedResult);
+  }
+};
+
+test('testing stylish JSON and YAML', () => {
+  runTest('file1.json', 'file2.json', 'expectFileStylish.txt', 'stylish');
 });
 
 test('testing stylish JSON default', () => {
-  const filePath1 = getFixturePath('file1.yaml');
-  const filePath2 = getFixturePath('file2.yaml');
-  const resultPath = getFixturePath('expectFileStylish.txt');
-
-  const expectedResult = readFile(resultPath).trim();
-
-  expect(genDiff(filePath1, filePath2, 'stylish')).toEqual(expectedResult);
+  runTest('file1.yaml', 'file2.yaml', 'expectFileStylish.txt', 'stylish');
 });
 
 test('testing plain JSON', () => {
-  const filePath1 = getFixturePath('file1.json');
-  const filePath2 = getFixturePath('file2.json');
-  const resultPath = getFixturePath('expectFilePlain.txt');
-
-  const expectedResult = readFile(resultPath).trim();
-
-  expect(genDiff(filePath1, filePath2, 'plain')).toEqual(expectedResult);
+  runTest('file1.json', 'file2.json', 'expectFilePlain.txt', 'plain');
 });
 
 test('testing plain YAML', () => {
-  const filePath1 = getFixturePath('file1.yaml');
-  const filePath2 = getFixturePath('file2.yaml');
-  const resultPath = getFixturePath('expectFilePlain.txt');
-
-  const expectedResult = readFile(resultPath).trim();
-
-  expect(genDiff(filePath1, filePath2, 'plain')).toEqual(expectedResult);
+  runTest('file1.yaml', 'file2.yaml', 'expectFilePlain.txt', 'plain');
 });
 
 test('testing json formatting', () => {
-  const filePath1 = getFixturePath('file1.yaml');
-  const filePath2 = getFixturePath('file2.yaml');
-  const resultPath = getFixturePath('diffJSON.txt');
-
-  const expectedResult = readFile(resultPath).trim();
-  const expectedJsonString = JSON.stringify(JSON.parse(expectedResult));
-
-  expect(genDiff(filePath1, filePath2, 'json')).toEqual(expectedJsonString);
+  runTest('file1.yaml', 'file2.yaml', 'diffJSON.txt', 'json');
 });

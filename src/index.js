@@ -30,7 +30,7 @@ const formatDiff = (diffTree, format) => {
   }
 };
 
-const genDiff = (filepath1, filepath2, format = 'stylish') => {
+const genDiff = (filepath1, filepath2, format) => {
   const fullFilePath1 = getFullPath(filepath1);
   const fullFilePath2 = getFullPath(filepath2);
 

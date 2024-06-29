@@ -41,4 +41,4 @@ const genDiff = (filepath1, filepath2, format = 'stylish') => {
   return formatDiff(diffTree, format);
 };
 
-export default { genDiff, readFile };
+export { genDiff, readFile };

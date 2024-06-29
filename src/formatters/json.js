@@ -1,28 +1,30 @@
 const formatJson = (diffTree) => {
   const convertNode = (node) => {
     if (node.type === 'nested') {
-      return node.children.reduce((acc, child) => {
-        acc[child.key] = convertNode(child);
-        return acc;
-      }, {});
+      return node.children.reduce((acc, child) => ({
+        ...acc,
+        [child.key]: convertNode(child),
+      }), {});
     }
-
-    const result = { changing: node.type };
 
     if (node.type === 'changed') {
-      result.value1 = node.oldValue;
-      result.value2 = node.newValue;
-    } else {
-      result.value = node.value;
+      return {
+        changing: node.type,
+        value1: node.oldValue,
+        value2: node.newValue,
+      };
     }
 
-    return result;
+    return {
+      changing: node.type,
+      value: node.value,
+    };
   };
 
-  const result = diffTree.reduce((acc, node) => {
-    acc[node.key] = convertNode(node);
-    return acc;
-  }, {});
+  const result = diffTree.reduce((acc, node) => ({
+    ...acc,
+    [node.key]: convertNode(node),
+  }), {});
 
   return JSON.stringify(result);
 };

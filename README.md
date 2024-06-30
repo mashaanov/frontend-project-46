@@ -14,13 +14,14 @@ Has various output formats: stylish, plain, json
 ## Installation
 
 ### 1. Clone repository:
-    Compare two files and see the differences between strings in different formats.
+    git@github.com:mashaanov/frontend-project-46.git
 ### 2. Install dependencies:
     npm install
 ### 3. Install local packages:
     sudo npm link
     
-Usage:
+## Usage
+
 gendiff -h  to see docs
 
 gendiff <path to file1> <path to file2>  to generate differences with default stylish output

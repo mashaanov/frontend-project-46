@@ -22,15 +22,15 @@ Has various output formats: stylish, plain, json
     
 ## Usage
 
-###to see docs:
+### to see docs:
     gendiff -h  
 
-###to generate differences with default stylish output:
+### to generate differences with default stylish output:
     gendiff <path to file1> <path to file2>
 
-###to plain output:
+### to plain output:
     gendiff --format plain <path to file1> <path to file2> 
 
-###to json output:
+### to json output:
     gendiff -f json <path to file1> <path to file2> 
 <a href="https://asciinema.org/a/d7S5ZP6upxQm3JO42utsAVY6t" target="_blank"><img src="https://asciinema.org/a/d7S5ZP6upxQm3JO42utsAVY6t.svg" /></a>

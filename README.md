@@ -14,9 +14,9 @@ Has various output formats: stylish, plain, json
 ## Installation
 
 ### 1. Clone repository:
-Compare two files and see the differences between strings in different formats.
+    Compare two files and see the differences between strings in different formats.
 ### 2. Install dependencies:
-   npm install
+    npm install
 ### 3. Install local packages:
     sudo npm link
     

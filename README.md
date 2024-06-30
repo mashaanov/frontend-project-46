@@ -7,8 +7,8 @@ Compare two files and see the differences between strings in different formats.
 
 This is a CLI utility to determine the differences between data configurations.
 
-Supports working with two files of different formats: json, yaml
-Works with flat and tree data structures
+Supports working with two files of different formats: json, yaml.
+Works with flat and tree data structures.
 Has various output formats: stylish, plain, json
 
 ## Installation

@@ -7,7 +7,7 @@ const getFormattedValue = (value) => {
   if (_.isString(value)) {
     return `'${value}'`;
   }
-  return value;
+  return `${value}`;
 };
 
 const getPropertyPath = (parentPath, property) => (parentPath ? `${parentPath}.${property}` : property);

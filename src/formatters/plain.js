@@ -14,21 +14,23 @@ const getPropertyPath = (parentPath, property) => (parentPath ? `${parentPath}.$
 
 const plainFormatter = (diffTree, parentPath = '') => {
   const lines = diffTree
-    .map((node) => {
-      const propertyPath = getPropertyPath(parentPath, node.key);
-      switch (node.type) {
+    .map(({
+      key, type, value, children, oldValue, newValue,
+    }) => {
+      const propertyPath = getPropertyPath(parentPath, key);
+      switch (type) {
         case 'added':
-          return `Property '${propertyPath}' was added with value: ${getFormattedValue(node.value)}`;
+          return `Property '${propertyPath}' was added with value: ${getFormattedValue(value)}`;
         case 'deleted':
           return `Property '${propertyPath}' was removed`;
         case 'changed':
-          return `Property '${propertyPath}' was updated. From ${getFormattedValue(node.oldValue)} to ${getFormattedValue(node.newValue)}`;
+          return `Property '${propertyPath}' was updated. From ${getFormattedValue(oldValue)} to ${getFormattedValue(newValue)}`;
         case 'nested':
-          return plainFormatter(node.children, propertyPath);
+          return plainFormatter(children, propertyPath);
         case 'unchanged':
           return null;
         default:
-          throw new Error(`Unknown node type: ${node.type}`);
+          throw new Error(`Unknown node type: ${type}`);
       }
     });
   return lines.filter((line) => line !== null).join('\n');

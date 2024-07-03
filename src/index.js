@@ -2,9 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import parse from './parses.js';
 import buildTree from './buildTree.js';
-import stylishFormatter from './formatters/stylish.js';
-import plainFormatter from './formatters/plain.js';
-import jsonFormatter from './formatters/json.js';
+import formatDiff from './formatters/formatDiff.js';
 
 const getFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 const getExtFormat = (filepath) => path.extname(filepath).slice(1);
@@ -15,19 +13,6 @@ const getData = (filepath) => {
   const content = readFile(filepath);
   const format = getExtFormat(filepath);
   return parse(content, format);
-};
-
-const formatDiff = (diffTree, format) => {
-  switch (format) {
-    case 'stylish':
-      return stylishFormatter(diffTree);
-    case 'plain':
-      return plainFormatter(diffTree);
-    case 'json':
-      return jsonFormatter(diffTree);
-    default:
-      throw new Error(`Unknown format: ${format}`);
-  }
 };
 
 const genDiff = (filepath1, filepath2, format = 'stylish') => {

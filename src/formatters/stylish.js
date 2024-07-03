@@ -19,20 +19,22 @@ const stylishFormatter = (diffTree, depth = 1, countSpace = 4) => {
   const indent = getIndentation(depth, countSpace);
   const sortedTree = _.sortBy(diffTree, 'key');
   const result = sortedTree
-    .map((node) => {
-      switch (node.type) {
+    .map(({
+      key, type, value, children, oldValue, newValue,
+    }) => {
+      switch (type) {
         case 'added':
-          return `${indent}+ ${node.key}: ${formatValue(node.value, depth, countSpace)}`;
+          return `${indent}+ ${key}: ${formatValue(value, depth, countSpace)}`;
         case 'deleted':
-          return `${indent}- ${node.key}: ${formatValue(node.value, depth, countSpace)}`;
+          return `${indent}- ${key}: ${formatValue(value, depth, countSpace)}`;
         case 'changed':
-          return `${indent}- ${node.key}: ${formatValue(node.oldValue, depth, countSpace)}\n${indent}+ ${node.key}: ${formatValue(node.newValue, depth, countSpace)}`;
+          return `${indent}- ${key}: ${formatValue(oldValue, depth, countSpace)}\n${indent}+ ${key}: ${formatValue(newValue, depth, countSpace)}`;
         case 'unchanged':
-          return `${indent}  ${node.key}: ${formatValue(node.value, depth, countSpace)}`;
+          return `${indent}  ${key}: ${formatValue(value, depth, countSpace)}`;
         case 'nested':
-          return `${indent}  ${node.key}: ${stylishFormatter(node.children, depth + 1, countSpace)}`;
+          return `${indent}  ${key}: ${stylishFormatter(children, depth + 1, countSpace)}`;
         default:
-          throw new Error(`unknown type: ${node.type}`);
+          throw new Error(`unknown type: ${type}`);
       }
     }).join('\n');
   const bracketIndent = getBracketIndentation(depth, ' ', countSpace);

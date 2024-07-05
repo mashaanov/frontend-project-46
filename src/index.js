@@ -14,4 +14,3 @@ export default (pathFile1, pathFile2, formatName = 'stylish') => {
   const diff = buildTree(dataFile1, dataFile2);
   return formatDiff(diff, formatName);
 };
-

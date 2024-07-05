@@ -1,5 +1,8 @@
-import { genDiff, readFile } from '../src/index.js';
+import fs from 'fs';
+import genDiff from '../src/index.js';
 import getFixturePath from '../src/helper.js';
+
+const readFile = (filepath) => fs.readFileSync(filepath, 'utf-8');
 
 const runTest = (fileName1, fileName2, resultFileName, format) => {
   const filePath1 = getFixturePath(fileName1);

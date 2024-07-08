@@ -1,11 +1,11 @@
 import path from 'path';
 import { readFileSync } from 'fs';
-import parse from './parses.js';
+import parsers from './parsers.js';
 import formatDiff from './formatters/formatDiff.js';
 import buildTree from './buildTree.js';
 
 const getTypeFile = (pathFile) => path.extname(pathFile).slice(1);
-const getData = (filepath) => parse(readFileSync(filepath, 'utf-8'), getTypeFile(filepath));
+const getData = (filepath) => parsers(readFileSync(filepath, 'utf-8'), getTypeFile(filepath));
 const buildFullPath = (filepath) => path.resolve(process.cwd(), filepath);
 
 export default (pathFile1, pathFile2, formatName = 'stylish') => {
